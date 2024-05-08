@@ -110,3 +110,8 @@ variable "roles" {
   type        = list(string)
   default     = []
 }
+variable "oauth_scopes" {
+  description = "List of oauth scopes to assign"
+  type        = list(string)
+  default     = []
+}

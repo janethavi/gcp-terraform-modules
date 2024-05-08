@@ -128,13 +128,23 @@ resource "google_container_node_pool" "node_pool" {
     service_account = google_service_account.cluster_service_account.email
     image_type      = "COS_CONTAINERD"
     local_ssd_count = 0
-    disk_size_gb    = 100
+    disk_size_gb    = 50
     disk_type       = "pd-balanced"
     metadata = {
       disable-legacy-endpoints = true
     }
     workload_metadata_config {
       mode = "GKE_METADATA"
+    }
+    oauth_scopes = var.oauth_scopes
+    taint {
+      key    = "node.cilium.io/agent-not-ready"
+      value  = "true"
+      effect = "NO_EXECUTE"
+    }
+    shielded_instance_config {
+      enable_integrity_monitoring = true
+      enable_secure_boot          = false
     }
     labels = var.labels
   }
