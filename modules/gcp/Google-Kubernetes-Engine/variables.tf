@@ -49,6 +49,11 @@ variable "node_pool_location" {
   description = "The node pool location"
   type        = string
 }
+variable "preemptible_nodes" {
+  description = "Whether the node pool is preemptible"
+  type        = bool
+  default     = false
+}
 variable "node_pool_zone_locations" {
   description = "The node pool node zone locations"
   type        = list(string)
@@ -56,6 +61,11 @@ variable "node_pool_zone_locations" {
 variable "node_pool_node_count" {
   description = "The node pool node count"
   type        = number
+}
+variable "node_location_policy" {
+  description = "The node location policy"
+  type        = string
+  default     = "BALANCED"
 }
 variable "node_pool_machine_type" {
   description = "The node pool machine type"

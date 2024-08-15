@@ -123,7 +123,7 @@ resource "google_container_node_pool" "node_pool" {
   version        = var.master_kubernetes_version
 
   node_config {
-    preemptible     = false
+    preemptible     = var.preemptible_nodes
     machine_type    = var.node_pool_machine_type
     service_account = google_service_account.cluster_service_account.email
     image_type      = "COS_CONTAINERD"
@@ -160,7 +160,7 @@ resource "google_container_node_pool" "node_pool" {
   autoscaling {
     max_node_count  = var.node_pool_max_node_count
     min_node_count  = var.node_pool_min_node_count
-    location_policy = "BALANCED"
+    location_policy = var.node_location_policy
   }
   upgrade_settings {
     max_surge       = 1
